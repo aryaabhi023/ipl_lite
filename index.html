@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Match</title>
+    <style>
+      #container {
+        background-color: rgb(66, 135, 135);
+        margin: auto;
+        margin-top: 12px;
+        padding: 10px;
+        box-shadow: 4px 4px 4px black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <p id="id1">MI Score: 0</p>
+      <p id="id2">RCB Score: 0</p>
+      <button id="btn">Start Match</button>
+    </div>
+    <script>
+      var run1 = 0;
+      var run2 = 0;
+      function onClick() {
+        const event1 = setInterval(() => {
+          if (run1 >= 120) {
+            alert("MI wins");
+            clearInterval(event1);
+          } else if (run2 >= 120) {
+            alert("RCB wins");
+            clearInterval(event1);
+          } else {
+            run1 = run2 + Math.floor(Math.random() * 6 + 1);
+            run2 = run1 + Math.floor(Math.random() * 6 + 1);
+            const e1 = document.getElementById("id1");
+            const e2 = document.getElementById("id2");
+            e1.innerHTML = `MI Score: ${run1}`;
+            e2.innerHTML = `RCB Score: ${run2}`;
+          }
+          let randomID = Math.floor(Math.random() * 167712).toString(16);
+          document.body.style.backgroundColor = `#${randomID}`;
+          console.log(randomID);
+        }, 1000);
+      }
+      document.getElementById("btn").addEventListener("click", onClick);
+    </script>
+  </body>
+</html>
