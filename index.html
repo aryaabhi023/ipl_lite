@@ -6,43 +6,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MI vs RCB</title>
     <style>
+      img {
+        width: 150px;
+        transition: all 0.5s;
+      }
+      img:hover {
+        transform: scale(1.1);
+      }
+      #img1 {
+        margin-top: 30px;
+        box-shadow: 4px 4px 4px;
+      }
+      #img2 {
+        box-shadow: 4px 4px 4px rgb(93, 74, 50);
+      }
+      #id1 {
+        margin-top: 45px;
+      }
       #container {
-        background-color: rgb(66, 135, 135);
+        width: 70%;
+        height: 370px;
+        background-color: #ccc;
         margin: auto;
-        margin-top: 12px;
+        margin-top: 80px;
         padding: 10px;
         box-shadow: 4px 4px 4px black;
+      }
+      #header {
+        display: flex;
+        justify-content: center;
+      }
+      h3 {
+        padding: 5px;
+        border-bottom: 2px solid black;
+      }
+      #team {
+        display: flex;
+        justify-content: space-around;
+      }
+      p {
+        margin-left: 40px;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      button {
+        border: 2px solid rgb(62, 56, 56);
+        background: #312c2c;
+        color: #ccc;
+        margin: 40px;
+        padding: 10px;
+        border-radius: 20px;
+        width: 80%;
+        transition: all 0.5s;
+      }
+      button:hover {
+        transform: scale(1.1);
       }
     </style>
   </head>
   <body>
     <div id="container">
-      <p id="id1">MI Score: 0</p>
-      <p id="id2">RCB Score: 0</p>
+      <div id="header">
+        <h3>Target: 200</h3>
+      </div>
+      <div id="team">
+        <div id="mi">
+          <img id="img1" src="MI.jpg" alt="MI LOGO" />
+          <p id="id1">MI Score: 0</p>
+        </div>
+        <div id="rcb">
+          <img id="img2" src="RCB.jpg" alt="RCB LOGO" />
+          <p id="id2">RCB Score: 0</p>
+        </div>
+      </div>
       <button id="btn">Start Match</button>
     </div>
     <script>
-      var run1 = 0;
-      var run2 = 0;
       function onClick() {
+        var run1 = 0;
+        var run2 = 0;
         const event1 = setInterval(() => {
-          if (run1 >= 120) {
+          if (run1 >= 200) {
             alert("MI wins");
             clearInterval(event1);
-          } else if (run2 >= 120) {
+          } else if (run2 >= 200) {
             alert("RCB wins");
             clearInterval(event1);
           } else {
-            run1 = run2 + Math.floor(Math.random() * 6 + 1);
             run2 = run1 + Math.floor(Math.random() * 6 + 1);
+            run1 = run2 + Math.floor(Math.random() * 6 + 1);
             const e1 = document.getElementById("id1");
             const e2 = document.getElementById("id2");
             e1.innerHTML = `MI Score: ${run1}`;
             e2.innerHTML = `RCB Score: ${run2}`;
           }
-          let randomID = Math.floor(Math.random() * 167712).toString(16);
-          document.body.style.backgroundColor = `#${randomID}`;
-          console.log(randomID);
+          if (run1 >= run2) document.body.style.backgroundColor = `#2c778f`;
+          else {
+            document.body.style.backgroundColor = `#8b0000`;
+          }
         }, 1000);
       }
       document.getElementById("btn").addEventListener("click", onClick);
